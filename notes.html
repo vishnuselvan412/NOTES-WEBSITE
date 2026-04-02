@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Notes App</title>
+<link rel="stylesheet" href="notes.css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">
+    <span class="logo-icon">📝</span>
+    <span>Notes</span>
+  </div>
+  <div class="header-right">
+    <span class="note-count" id="note-count">0 notes</span>
+    <button class="btn-new" onclick="openModal()">+ New Note</button>
+  </div>
+</header>
+
+<!-- Search -->
+<div class="search-bar">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="search-input" placeholder="Search notes..." oninput="renderNotes()"/>
+  </div>
+</div>
+
+<!-- Notes Grid -->
+<div class="notes-grid" id="notes-grid"></div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">New Note</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="field-label">Title</div>
+        <input type="text" class="modal-input" id="note-title-input" placeholder="Note title..."/>
+      </div>
+      <div>
+        <div class="field-label">Content</div>
+        <textarea class="modal-textarea" id="note-body-input" placeholder="Write your note here..."></textarea>
+      </div>
+      <div>
+        <div class="field-label">Color</div>
+        <div class="color-picker" id="color-picker">
+          <div class="color-opt c-purple selected" data-color="purple" onclick="selectColor(this)"></div>
+          <div class="color-opt c-yellow" data-color="yellow" onclick="selectColor(this)"></div>
+          <div class="color-opt c-green" data-color="green" onclick="selectColor(this)"></div>
+          <div class="color-opt c-pink" data-color="pink" onclick="selectColor(this)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveNote()">Save Note</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm -->
+<div class="confirm-overlay hidden" id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑️</div>
+    <h4>Delete Note?</h4>
+    <p>This note will be permanently deleted. This cannot be undone.</p>
+    <div class="confirm-btns">
+      <button class="btn-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-del-confirm" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="notes.js"></script>
+</body>
+</html>
